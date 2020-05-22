@@ -1,0 +1,158 @@
+{
+	"info": {
+		"_postman_id": "4ea5caff-76e6-492a-978c-f75b58a12c91",
+		"name": "myStuff",
+		"description": "Queries for project myStuff, a SEA challenge from 2020-05-20",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getAll",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}items",
+					"host": [
+						"{{base_url}}items"
+					]
+				},
+				"description": "Retrieve all items"
+			},
+			"response": []
+		},
+		{
+			"name": "createItem",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "b6bd5320-cfa8-48d6-9afb-a2a4af217837",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": 1,\n    \"description\": \"Old tin box\",\n    \"lastUsed\": \"{{last_used_time}}\",\n    \"location\": \"attic\",\n    \"name\": \"Turntable\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}items",
+					"host": [
+						"{{base_url}}items"
+					]
+				},
+				"description": "Create new item entity"
+			},
+			"response": []
+		},
+		{
+			"name": "getById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}items/7",
+					"host": [
+						"{{base_url}}items"
+					],
+					"path": [
+						"7"
+					]
+				},
+				"description": "Retrieve one item, matching the given _id_"
+			},
+			"response": []
+		},
+		{
+			"name": "deleteItem",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}items/5",
+					"host": [
+						"{{base_url}}items"
+					],
+					"path": [
+						"5"
+					]
+				},
+				"description": "Delete an item matching the given _id_"
+			},
+			"response": []
+		},
+		{
+			"name": "updateItem",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": 1,\n    \"description\": \"Really weird college stuff\",\n    \"lastUsed\": \"2019-10-05T12:00:00\",\n    \"location\": \"attic\",\n    \"name\": \"Photo Box\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}items/3",
+					"host": [
+						"{{base_url}}items"
+					],
+					"path": [
+						"3"
+					]
+				},
+				"description": "Replace an item given by its _id_ with a new item"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "efe520b0-7b2d-4c31-ab04-4b271570a2a1",
+				"type": "text/javascript",
+				"exec": [
+					"// current time in {{last_used_time}}",
+					"",
+					"const moment = require('moment');",
+					"pm.environment.set(\"last_used_time\", moment().toISOString());"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "8d587faa-2239-45b7-838a-debccd9bcdad",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "5558d68a-a33c-4309-be0f-8f30db3bcce6",
+			"key": "base_url",
+			"value": "http://localhost:8080/api/v1/",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
